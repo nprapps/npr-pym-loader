@@ -19,8 +19,7 @@ logger.setLevel(LOG_LEVEL)
 S3_BUCKET = 'pym.nprapps.org'
 GZIP_FILE_TYPES = ['*.js']
 # DEFAULT_MAX_AGE = 604800  # One week
-# DEFAULT_MAX_AGE = 86400  # One day
-DEFAULT_MAX_AGE = 20  # One day
+DEFAULT_MAX_AGE = 86400  # One day
 
 
 def prep_bool_arg(arg):
