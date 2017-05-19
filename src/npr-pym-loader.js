@@ -43,7 +43,11 @@
                 _raiseCustomEvent("pym-loaded");
             }
             var autoInitInstances = pym.autoInit();
+            window.npr_pym_loading = undefined;
             return autoInitInstances;
+        }
+        if (!doNotRaiseEvents) {
+            window.npr_pym_loading = undefined;
         }
         return null;
     };
@@ -127,7 +131,6 @@
 
             // Load pym into local namespace
             require_pym(libs, function(require, pym, carebot) {
-                window.npr_pym_loading = undefined;
                 initializePym(pym);
                 if (carebot) {
                     initializeCarebot(pym, carebot);
@@ -154,7 +157,6 @@
         if (typeof jQuery !== 'undefined' && typeof jQuery.getScript === 'function') {
             jQuery.getScript(pymUrl)
                 .done(function() {
-                    window.npr_pym_loading = undefined;
                     // Load carebot when used inside npr.org
                     if (carebotUrl) {
                         jQuery.getScript(carebotUrl).done(function() {
@@ -189,7 +191,6 @@
         script.type = 'text/javascript';
         script.src = pymUrl;
         script.onload = function() {
-            window.npr_pym_loading = undefined;
             // Remove the script tag once pym it has been loaded
             if (head && script.parentNode) {
                 head.removeChild(script);
