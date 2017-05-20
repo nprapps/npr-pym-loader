@@ -155,13 +155,15 @@
         if (typeof jQuery !== 'undefined' && typeof jQuery.getScript === 'function') {
             jQuery.getScript(pymUrl)
                 .done(function() {
-                    initializePym(window.pym);
-                    // Load carebot when used inside npr.org
-                    if (carebotUrl) {
-                        jQuery.getScript(carebotUrl).done(function() {
-                            initializeCarebot(window.pym, window.CarebotTracker);
-                        });
-                    }
+                    jQuery(function () {
+                        initializePym(window.pym);
+                        // Load carebot when used inside npr.org
+                        if (carebotUrl) {
+                            jQuery.getScript(carebotUrl).done(function() {
+                                initializeCarebot(window.pym, window.CarebotTracker);
+                            });
+                        }
+                    });
                 })
                 .fail(function() {
                     console.error('could not load pym with jQuery');
