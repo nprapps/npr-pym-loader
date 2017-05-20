@@ -20,6 +20,7 @@ S3_BUCKET = 'pym.nprapps.org'
 GZIP_FILE_TYPES = ['*.js']
 # DEFAULT_MAX_AGE = 604800  # One week
 DEFAULT_MAX_AGE = 86400  # One day
+# DEFAULT_MAX_AGE = 20  # 20 seconds
 
 
 def prep_bool_arg(arg):

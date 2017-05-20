@@ -1,4 +1,4 @@
-/*! npr-pym-loader.js - v1.0.1 - 2017-05-19 */
+/*! npr-pym-loader.js - v1.0.1 - 2017-05-20 */
 /*
 * npr-pym-loader is a wrapper library that deals with particular CMS scenarios to successfully load Pym.js and carebot in NPR.org into a given page
 * To find out more about Pym.js check out the docs at http://blog.apps.npr.org/pym.js/ or the readme at README.md for usage.
@@ -43,14 +43,12 @@
             if (!doNotRaiseEvents) {
                 _raiseCustomEvent("pym-loaded");
             }
-            var autoInitInstances = pym.autoInit();
+            pym.autoInit();
             window.npr_pym_loading = undefined;
-            return autoInitInstances;
+            return true;
         }
-        if (!doNotRaiseEvents) {
-            window.npr_pym_loading = undefined;
-        }
-        return null;
+        window.npr_pym_loading = undefined;
+        return false;
     };
 
     /**
@@ -158,6 +156,7 @@
         if (typeof jQuery !== 'undefined' && typeof jQuery.getScript === 'function') {
             jQuery.getScript(pymUrl)
                 .done(function() {
+                    initializePym(window.pym);
                     // Load carebot when used inside npr.org
                     if (carebotUrl) {
                         jQuery.getScript(carebotUrl).done(function() {
@@ -233,7 +232,10 @@
     // 2. Use a flag (npr_pym_loading) to account for asynchronous loading and remove it on actual load or error
     if ((!document.querySelectorAll('[data-pym-auto-initialized]').length) &&
         (!window.npr_pym_loading)) {
+        // Set the loading flag
         window.npr_pym_loading = true;
+
+        // Start load strategy
         tryLoadingWithRequirejs(pymUrl, carebotUrl) || tryLoadingWithJQuery(pymUrl, carebotUrl) || loadPymViaEmbedding(pymUrl, carebotUrl);
 
         /** Callback to initialize Pym.js on document load events

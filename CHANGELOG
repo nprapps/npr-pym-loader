@@ -2,6 +2,7 @@
 -----
 
 * Move flag reset to after pym has been initialized
+* Fix initialize pym on jQuery strategy
 
 1.0.0
 -----
