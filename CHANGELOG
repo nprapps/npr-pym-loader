@@ -1,3 +1,8 @@
+2.0.0
+-----
+
+* Change to remove autoInit that would cause trouble when mixing different embeds on a page
+
 1.0.1
 -----
 

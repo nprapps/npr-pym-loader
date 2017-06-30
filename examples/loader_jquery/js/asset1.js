@@ -3,7 +3,7 @@
  */
 var pymChild = null;
 var onWindowLoaded = function() {
-    pymChild = new pym.Child({});
+    pymChild = new pym.Child();
     var onBoundingClientRectRequest = function(id) {
         console.log("BoundingRectReceived", id);
         var container = document.getElementById(id);
@@ -23,14 +23,7 @@ var onWindowLoaded = function() {
     // Parent asks for the position of the element to check visibility
     pymChild.onMessage('request-bounding-client-rect', onBoundingClientRectRequest);
     pymChild.sendMessage('test-visibility-tracker', 'test');
-    pymChild.sendMessage('request-tracking', 'tracker-test-2');
-    pymChild.onMessage('on-screen', function(bucket) {
-        console.log('asset2-on-screen');
-    });
-    pymChild.onMessage('scroll-depth', function(data) {
-        console.log('asset2-scrolldepth');
-        data = JSON.parse(data);
-    });
+    pymChild.sendMessage('request-tracking', 'tracker-test-1');
 }
 
 /*

@@ -1,6 +1,6 @@
 {
   "name": "npr-pym-loader.js",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "defaultPymUrl": "https://pym.nprapps.org/pym.v1.min.js",
   "defaultCarebotUrl": "https://carebot.nprapps.org/carebot-tracker.v0.min.js",
   "description": "Custom pym loader for NPR and member stations",
