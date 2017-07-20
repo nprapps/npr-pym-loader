@@ -63,6 +63,12 @@ Node.js is required. If you don't already have it, get it like this:
 brew install node
 ```
 
+Then, Make sure you have grunt installed globally
+
+```
+npm install -g grunt
+```
+
 Then bootstrap the project:
 
 ```
@@ -84,7 +90,7 @@ In order to run pym.js the best approach is to fire up a local webserver and go 
 The included server includes `livereload` so each time you change something on the `examples` or `src` folder the server will refresh the page for you.
 
 ```
-$ cd npr-pym-loader.js
+$ cd npr-pym-loader
 $ grunt server
 ```
 

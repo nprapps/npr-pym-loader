@@ -65,10 +65,22 @@
                 }
                 (function() {
                     var container = containers[idx];
+                    // Check scroll track options
+                    var config = {};
+                    if (container.getAttribute('data-pym-trackscroll') !== null) {
+                        config['trackscroll'] = true;
+                    }
+                    if (container.getAttribute('data-pym-scrollwait') !== null) {
+                        var n = Number(container.getAttribute('data-pym-scrollwait'));
+                        if (!isNaN(n)) {
+                            config['scrollwait'] = n;
+                        }
+                    }
+
                     var pymParent = new pym.Parent(
                         container.getAttribute('id'),
                         container.getAttribute('data-child-src'),
-                        {}
+                        config
                     );
                     container.setAttribute('data-embed-loaded', '');
                     if (onNpr()) {
@@ -152,7 +164,7 @@
                 shim['carebot'] = { 'exports': 'carebot' };
                 libs.push('carebot');
             }
-            var context = 'context_' + pymUrl.split('/').slice(-1)[0];
+            var context = 'context_loader_' + pymUrl.split('/').slice(-1)[0];
             // Requirejs detected, create a local require.js namespace
             var require_pym = requirejs.config({
                 'context': context,
@@ -265,21 +277,10 @@
     // Start load strategy
     // When the loader is added multiple times to the same page we need
     // to actually load scripts just once for better performance
-    // 1. Use a flag (npr_pym_tracker_loader_loading) to account for asynchronous loading and remove it on actual load or error
+    // 1. Use a flag (npr_pym_loader_loading) to account for asynchronous loading and remove it on actual load or error
     if (!window.npr_pym_loader_loading) {
         // Set the global loading flag
         window.npr_pym_loader_loading = true;
         tryLoadingWithRequirejs(pymUrl, carebotUrl) || tryLoadingWithJQuery(pymUrl, carebotUrl) || loadPymViaEmbedding(pymUrl, carebotUrl);
     }
-
-    // var pageLoaded = function() {
-    //     document.removeEventListener("DOMContentLoaded", pageLoaded);
-    //     window.removeEventListener("load", pageLoaded);
-    //     return initializePym(window.pym, true);
-    // };
-
-    // // Listen to page load events to account for pjax load and sync issues
-    // window.document.addEventListener("DOMContentLoaded", pageLoaded);
-    // // Fallback for wider browser support
-    // window.addEventListener("load", pageLoaded);
 })(window.requirejs, window.jQuery);
