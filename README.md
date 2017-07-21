@@ -7,6 +7,7 @@ npr-pym-loader
 * [Bootstrap the project](#bootstrap-the-project)
 * [Hide project secrets](#hide-project-secrets)
 * [Run the project](#run-the-project)
+* [Optional scroll tracking](#optional-scroll-tracking)
 * [Build the project](#build-the-project)
 * [Update the project](#update-the-project)
 * [Deploy the project](#deploy-the-project)
@@ -48,7 +49,7 @@ What's in here?
 
 The project contains the following folders and important files:
 
-* ``dist`` -- Unminified and minified versions of pym.js library and the pym-loader.js loader.
+* ``dist`` -- Unminified and minified versions of the library.
 * ``examples`` -- Collection of working use cases for npr-pym-loader.js
 * ``src`` -- Source files for this project
 * ``Gruntfile.js`` -- [Grunt.js](http://gruntjs.com/) task runner config file
@@ -122,6 +123,35 @@ API documention can be generated with [jsdoc](https://github.com/jsdoc3/jsdoc):
 ```
 grunt jsdoc
 ```
+
+Optional scroll tracking
+------------------------
+
+After the release of [Pym.js v1.3.0](http://blog.apps.npr.org/pym.js/#optional-scroll-tracking) there's an optional native support of scroll tracking on Pym.js.
+
+This is useful if the child page needs to do some actions based on the position of some of its elements on the current viewport, i.e., lazyload of assets.
+
+In order to use it you'll need to include some data-atributes on the container where Pym.js will include the child iFrame.
+* data-pym-trackscroll: to signal Pym that you want it to track the scroll on the parent page.
+* data-pym-scrollwait: If you want to override the default throttle wait on the scroll. Default: 100ms
+
+For example:
+
+```
+<p data-pym-loader data-pym-trackscroll data-pym-scrollwait="40" data-child-src="child.html" id="example">Loading...</p>
+<script type="text/javascript" src="npr-pym-loader.js"></script>
+```
+
+In order to see this functionality in action the easiest way is to fire up the local server.
+
+```
+$ cd npr-pym-loader
+$ grunt server
+```
+
+Then, open the [trackscroll example](http://localhost:9000/examples/trackscroll/).
+
+If you want to see it action on NPR.org take a look at [this](http://www.npr.org/sections/ed/2017/06/28/534396017/i-am-learning-ingl-s-a-dual-language-comic) story.
 
 Build the project
 -----------------
