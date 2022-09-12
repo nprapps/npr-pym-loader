@@ -1,3 +1,8 @@
+2.2.0
+-----
+
+* Fix to address iframes breaking in Firefox when the parent site uses OneTrust, a cookie / personal data-management service. (Added a parameter to have OneTrust ignore the iframe.)
+
 2.1.0
 -----
 
