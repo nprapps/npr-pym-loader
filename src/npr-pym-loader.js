@@ -83,6 +83,10 @@
                         config
                     );
                     container.setAttribute('data-embed-loaded', '');
+
+                    // Tell OneTrust to ignore this iframe
+                    pymParent.iframe.setAttribute("data-ot-ignore","");
+
                     if (onNpr()) {
                         pymParent.onMessage('pjax-navigate', onPJAXNavigateMessage);
                     }

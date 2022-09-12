@@ -1,4 +1,4 @@
-/*! npr-pym-loader.js - v2.1.0 - 2017-07-20 */
+/*! npr-pym-loader.js - v2.2.0 - 2022-09-11 */
 /*
 * npr-pym-loader is a wrapper library that deals with particular CMS scenarios to successfully load Pym.js and carebot in NPR.org into a given page
 * To find out more about Pym.js check out the docs at http://blog.apps.npr.org/pym.js/ or the readme at README.md for usage.
@@ -84,6 +84,10 @@
                         config
                     );
                     container.setAttribute('data-embed-loaded', '');
+
+                    // Tell OneTrust to ignore this iframe
+                    pymParent.iframe.setAttribute("data-ot-ignore","");
+
                     if (onNpr()) {
                         pymParent.onMessage('pjax-navigate', onPJAXNavigateMessage);
                     }
